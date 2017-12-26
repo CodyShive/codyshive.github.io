@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+   <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1"> 
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -35,6 +36,7 @@
         document.getElementsByTagName('head')[0].appendChild(script);
       }
 
+	
 	var getJSON = function(url, callback) {
 		var xhr = new XMLHttpRequest();
 		xhr.open('GET', url, true);
@@ -49,23 +51,25 @@
 		};
 		xhr.send();
 	};
-	 
-	getJSON('http://www.the-arrington-group.com/tmp/highchart2.json',
+	
+	
+	//getJSON('https://codyshive.github.io/highchart2.json', 
+	getJSON('https://dweet.io:443/get/latest/dweet/for/tgcs_map_demo',
 	function(err, data) {
 	  if (err !== null) {
 		alert('Something went wrong: ' + err);
 	  } else {
-		alert('Your query count: ' + data.query.count);
+		console.log(data);
+		var json=JSON.stringify(data); 
+		var json2=JSON.parse(json)
+		console.log(json2);
+		console.log('xxx');
+		console.log = json2.content[0].features.properties.place;
 	  }
-	  for(var i = 0; i < data.length; i++) {
-		var obj = data[i];
-		console.log(obj.id);
-		};
-	});	 
+	});
 	
-
 	
-	  
+	
 	  // Loop through the results array and place a marker for each
       // set of coordinates.
       window.eqfeed_callback = function(results) {
